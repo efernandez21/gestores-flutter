@@ -11,7 +11,16 @@ class Pagina1Page extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Pagina 1'),
+        title: BlocBuilder<UsuarioBloc,UsuarioState>(
+          builder: (_, state) {  
+            // Comprobamos si hay un usuario activo cambiamos el respectivo widget del title del appbar
+            if (state.existeUsuario) {
+              return Text(state.usuario.nombre);
+            } else {
+              return Text('Pagina 1');
+            }
+          },
+        ),
         actions: [
           IconButton(
               icon: Icon(Icons.delete),
